@@ -6,7 +6,23 @@
 <body>
     <h1>Welcome to our second test website! Attempt 2</h1>
 
+    <button onclick="location.href='seanearls.github.io/index.html?email=' + email" type="button">
+        Go to Site2
+    </button>
+
+
     <script type="text/javascript">
+        // Function to get query parameters from URL
+        function getQueryParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get email from URL
+        var email = getQueryParameter('email');
+
         // Include Klaviyo's JavaScript SDK
         var _learnq = _learnq || [];
         _learnq.push(['account', 'SEPBCg']);
@@ -19,7 +35,7 @@
 
         // Identify the same user
         _learnq.push(['identify', {
-            '$email' : 'test2user@testwebsite.com', // the user's email
+            '$email' : email, // the user's email
         }]);
 
         // Track a different event with Klaviyo
